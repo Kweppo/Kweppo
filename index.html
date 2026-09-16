@@ -11,11 +11,11 @@
     <div class="container">
         <!-- Horní widgetová lišta -->
         <div class="top-widgets">
-            <div class="widget weather-widget">
-                <span class="widget-icon">⛅</span>
+            <div class="widget">
+                <span class="widget-icon">📂</span>
                 <div>
-                    <div class="widget-title">Lokální klima</div>
-                    <div class="widget-value" id="weatherDisplay">Načítání...</div>
+                    <div class="widget-title">Lokální úložiště</div>
+                    <div class="widget-value">Aktivní (IndexedDB)</div>
                 </div>
             </div>
             <div class="widget status-widget">
@@ -97,9 +97,6 @@
         searchInput.addEventListener('input', (e) => {
             renderApps(e.target.value);
         });
-
-        // Jednoduchá simulace počasí bez nutnosti API klíče
-        document.getElementById('weatherDisplay').textContent = "Příjemně, 21 °C";
     </script>
 </body>
 </html>
