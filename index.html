@@ -9,21 +9,49 @@
 <body>
 
     <div class="container">
-        <h1>Kweppo</h1>
-        <div class="subtitle">ekosystem který je opravdu tvůj❤️</div>
-
-        <input type="text" id="searchInput" class="search-input" placeholder="Hledat aplikaci...">
-
-        <div class="apps-grid" id="appsContainer">
-            <!-- Sem se dynamicky načtou aplikace z apps.js -->
+        <!-- Horní widgetová lišta -->
+        <div class="top-widgets">
+            <div class="widget weather-widget">
+                <span class="widget-icon">⛅</span>
+                <div>
+                    <div class="widget-title">Lokální klima</div>
+                    <div class="widget-value" id="weatherDisplay">Načítání...</div>
+                </div>
+            </div>
+            <div class="widget status-widget">
+                <span class="widget-icon">⚡</span>
+                <div>
+                    <div class="widget-title">Stav ekosystému</div>
+                    <div class="widget-value">100% Offline & Bezpečné</div>
+                </div>
+            </div>
         </div>
 
+        <!-- Hlavička projektu -->
+        <header class="hub-header">
+            <h1>Kweppo</h1>
+            <p class="subtitle">ekosystem který je opravdu tvůj ❤️</p>
+        </header>
+
+        <!-- Vyhledávání a rychlý panel -->
+        <div class="action-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Hledat aplikaci v ekosystému...">
+        </div>
+
+        <!-- Hlavní mřížka aplikací -->
+        <div class="apps-grid" id="appsContainer">
+            <!-- Načteno z apps.js -->
+        </div>
+
+        <!-- Patička -->
         <footer>
-            &copy; 2026 Kweppo team
+            <span>&copy; 2026 Kweppo team</span>
+            <span class="dot-separator">•</span>
+            <a href="#" class="footer-link">O projektu</a>
         </footer>
     </div>
 
-    <!-- Načtení dat a logika -->
+    <!-- Logika a data -->
     <script src="apps.js"></script>
     <script>
         const container = document.getElementById('appsContainer');
@@ -38,7 +66,7 @@
             );
 
             if (filtered.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color: #888;">Žádná aplikace nenalezena.</p>';
+                container.innerHTML = '<div class="empty-state">Žádná aplikace neodpovídá hledání.</div>';
                 return;
             }
 
@@ -48,9 +76,14 @@
                 card.className = 'app-card';
                 
                 card.innerHTML = `
-                    <div class="app-icon"><img src="${app.icon}" alt="${app.name}"></div>
+                    <div class="app-icon-wrapper">
+                        <img src="${app.icon}" alt="${app.name}">
+                    </div>
                     <div class="app-info">
-                        <h3>${app.name}</h3>
+                        <div class="app-name-row">
+                            <h3>${app.name}</h3>
+                            <span class="app-tag">Aktivní</span>
+                        </div>
                         <p>${app.description}</p>
                     </div>
                 `;
@@ -64,6 +97,9 @@
         searchInput.addEventListener('input', (e) => {
             renderApps(e.target.value);
         });
+
+        // Jednoduchá simulace počasí bez nutnosti API klíče
+        document.getElementById('weatherDisplay').textContent = "Příjemně, 21 °C";
     </script>
 </body>
 </html>
